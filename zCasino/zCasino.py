@@ -1,22 +1,20 @@
 #!/home/neltarim/Download/python3
 # -*-coding:Utf-8 -*
 
-from menu import *
+from menu import * #on importe les modules de menu et jeu
 from game import *
-import random
-import time
 
-infinit = 0
+infinit = 1 #sert simplement a creer une boucle innfinie pour le reload de menu/jeu etc
 
-while infinit == 0:
+while infinit == 1:
 
-    choice = menu()
+    choice = menu() #on affiche le menu et demande quoi faire
 
-    if choice == 1:
+    if choice == 1: #option1 : on affiche les regles
         menuSeeRules()
 
-    if choice == 2:
+    if choice == 2: #option2 : on lance le jeu
         game()
 
-    if choice == 3:
+    if choice == 3: #option3 : on  quitte le jeu
         MenuQuit()

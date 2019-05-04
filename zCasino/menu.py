@@ -4,7 +4,7 @@
 import time
 
 
-def clearScreen():
+def clearScreen(): #nettoie jsute le terminal
     i = 0
 
     while i <= 30:
@@ -12,8 +12,7 @@ def clearScreen():
         i += 1
 
 
-def menu():
-    #choice = int(choice)
+def menu(): #affiche le menu et demande un choix a renvoyer dans infinit
 
     clearScreen()
     print("================== BIENVENUE AU zCASINO !!! ======================")
@@ -27,16 +26,16 @@ def menu():
     print('\n')
 
     choice = input("Votre choix : ")
-    choice = int(choice)
+    choice = int(choice) #on verifie  que l'input est un int
 
     if choice != 1 and choice != 2 and choice != 3:
-        print("Choix invalide.")
+        print("Choix invalide.") #on relance le menu en recursif si le joueur c'est trompe
         time.sleep(1)
-        return menu(choice)
-    else:
+        return menu() #retour recursif 
+    else: #sinon on renvoie le choix dans infinit
         return choice
 
-def menuSeeRules():
+def menuSeeRules(): #affiche les regles du jeu
     yesno = str()
 
     clearScreen()
@@ -54,18 +53,18 @@ def menuSeeRules():
     print('\n')
     
     time.sleep(3)
-    yesno = input("Revenir au menu ? (y/n) : ")
+    yesno = input("Revenir au menu ? (y/n) : ") #ferme les regles
 
-    if yesno == "y":
+    if yesno == "y": #termine la fonction et renvoie vers infinit
         return 0
-    elif yesno == "n":
+    elif yesno == "n": #relance en recursif les regles si non
         return menuSeeRules()
-    else:
+    else:  #gestion d'erreurs de frappes
         print("Choix invalide .")
         time.sleep(1)
         return menuSeeRules()
 
-def menuQuit():
+def menuQuit(): #quitte le programme
     yesno = str()
 
     print("Voulez vous vraiment quitter ? (y/n) : ", end='')
