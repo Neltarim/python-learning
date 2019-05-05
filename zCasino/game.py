@@ -29,13 +29,13 @@ def lost(): #si le joueur n'a plus d'argent
     yesno = input()
 
     if  yesno == "y": #si le joueur veut rejouer, relance le jeu avec 500 $
-        game(500)
+        game(50)
     else: #sinon, retourne dans la boucle infinit
         print(" Retour au menu ...")
         time.sleep(2)
         return 0
 
-def game(money = 1000): #boucle de jeu
+def game(money =250): #boucle de jeu
     pary = 0    #le pari du joueur
     bet = 0     #sa mise
     wheel = 0   #le rand number
@@ -52,11 +52,25 @@ def game(money = 1000): #boucle de jeu
     print("     Les paris sont ouverts !")
     print(" Votre mise : ", end='')
     bet = int(input()) #on demande la  mise du joueur
-
     print()
+
+    if bet > money:
+        print("Vous n'avez pas assez d'argent ...")
+        time.sleep(1)
+        return game(money)
+    if bet <= 0:
+        print("Le croupier vous regarde d'un air etrange ...")
+        time.sleep(1)
+        return game(money)
+
     print(" Sur quelle case pariez vous ? : ", end='')
     pary = int(input()) #la case sur laquelle il veut parier
     print()
+
+    if pary > 50 or pary < 0:
+        print("Il n'y a que 50 cases monsieur.")
+        time.sleep(1)
+        return game(money)
 
     print("     Les jeux sont faits, rien ne va plus !!!")
     print()
@@ -70,7 +84,7 @@ def game(money = 1000): #boucle de jeu
         print(" Wow perfect shot !! Vous recuperez donc ", (bet * 3), "$ !")
         money += bet * 3
     elif cmpPairImpair(pary, wheel) == 1: #si il y a une couleur on double la mise
-        print(" Couleur ! Vous recuperez donc ", (bet * 2), "$ .")
+        print(" Couleur ! Vous recuperez donc ", (bet * 1.5), "$ .")
         money += bet * 2
     else: #sinon on prend sa mise
         print(" Dommaaaaage ... vous perdez donc ", bet, "$ ...")

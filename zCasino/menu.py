@@ -36,7 +36,7 @@ def menu(): #affiche le menu et demande un choix a renvoyer dans infinit
         return choice
 
 def menuSeeRules(): #affiche les regles du jeu
-    yesno = str()
+    key = str()
 
     clearScreen()
     print("======================== REGLES DU JEU =============================")
@@ -53,16 +53,12 @@ def menuSeeRules(): #affiche les regles du jeu
     print('\n')
     
     time.sleep(3)
-    yesno = input("Revenir au menu ? (y/n) : ") #ferme les regles
+    key = input("Press any key... : ") #ferme les regles
 
-    if yesno == "y": #termine la fonction et renvoie vers infinit
+    if key == "y": #termine la fonction et renvoie vers infinit
         return 0
-    elif yesno == "n": #relance en recursif les regles si non
-        return menuSeeRules()
-    else:  #gestion d'erreurs de frappes
-        print("Choix invalide .")
-        time.sleep(1)
-        return menuSeeRules()
+    else: #maj pour any key a la place d'un yesno
+        return 0
 
 def menuQuit(): #quitte le programme
     yesno = str()
