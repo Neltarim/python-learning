@@ -53,7 +53,7 @@ def menuSeeRules(): #affiche les regles du jeu
     print('\n')
     
     time.sleep(3)
-    key = input("Press any key... : ") #ferme les regles
+    key = input("Appuyer sur ENTER pour revenir au menu ... : ") #ferme les regles
 
     if key == "y": #termine la fonction et renvoie vers infinit
         return 0

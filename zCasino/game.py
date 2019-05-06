@@ -89,9 +89,11 @@ def game(money =250): #boucle de jeu
     else: #sinon on prend sa mise
         print(" Dommaaaaage ... vous perdez donc ", bet, "$ ...")
         money -= bet
+        time.sleep(2)
 
     if money <= 0: #si le joueur  n'a plus un rond, on lance la fonction lost
-        lost()
+        if lost() == 0:
+            return 0
 
     print(" Quitter la table et repartir avec vos gains ? (y/n) : ", end='')
     yesno = input() #rejouer ou non
