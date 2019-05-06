@@ -1,1 +1,2 @@
-voici le contenu du fichier
+nouvelle chaine
+deuxieme chaine
