@@ -1,4 +1,4 @@
-#!/home/neltarim/Download/python3
+#!/bin/python3
 # -*-coding:Utf-8 -*
 
 a = input("Saisissez une table : ")

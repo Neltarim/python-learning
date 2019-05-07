@@ -1,4 +1,4 @@
-#!/home/neltarim/Download/python3
+#!/bin/python3
 # -*-coding:Utf-8 -*
 
 def table(nb, max=10): #on met max 0 dix par defaut
