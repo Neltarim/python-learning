@@ -25,10 +25,15 @@ print(contenu)
 my_file.close() #ferme le fichier
 
 
-my_file = open(path, 'w')
+my_file = open(path, "w")
 my_file.write("nouvelle chaine\n") #ecrit par dessus le fichier
 my_file.close()
 
-my_file = open(path, 'a')
+my_file = open(path,"a")
 my_file.write("deuxieme chaine")
 my_file.close()
+
+#ouverture safe:
+
+with open(path, "r") as new_file: #with permet de fermer le fichier if except
+    text = new_file.read()  #lis  le fichier

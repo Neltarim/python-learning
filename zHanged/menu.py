@@ -1,26 +1,23 @@
 #!/bin/python3
 # -*-coding:Utf-8 -*
 
-import time
+def clearScreen():
+    index = 0
 
-
-def clearScreen(): #nettoie jsute le terminal
-    i = 0
-
-    while i <= 30:
-        print('\n')
-        i += 1
-
+    while index != 30:
+        print()
+        index += 1
 
 def menu(): #affiche le menu et demande un choix a renvoyer dans infinit
 
     clearScreen()
-    print("================== BIENVENUE AU zCASINO !!! ======================")
+    print("================== BIENVENUE AU zHANGED !!! ======================")
     print("******************************************************************")
     print("*                                                                *")
     print("*            1 : Afficher les regles du jeu                      *")
     print("*            2 : Nouvelle partie                                 *")
-    print("*            3 : Quitter le jeu                                  *")
+    print("*            3 : afficher les scores                             *")
+    print("*            4 : Quitter le jeu                                  *")
     print("*                                                                *")
     print("******************************************************************")
     print('\n')
@@ -42,12 +39,12 @@ def menuSeeRules(): #affiche les regles du jeu
     print("======================== REGLES DU JEU =============================")
     print("********************************************************************")
     print("*                                                                  *")
-    print("* tout d'abord, le joueur choisit un nombre, la roulette choisit,  *")
-    print("* ensuite un nombre. Si ce nombre est le meme, le joueur triple    *")
-    print("* sa mise de depart. Si il est de la meme couleur (pair ou impair) *")
-    print("* alors il double sa mise. Sinon , il perd sa mise .               *")
+    print("*    Les regles sont simples, la machine choisit un mot,           *")
+    print("*    vous devez deviner le mot.                                    *")
+    print("*    Mais attention : vous n'avez que 10 essaies possibles,        *")
+    print("*    Au dela, vous passerez votre tete dans le noeud !             *")
     print("*                                                                  *")
-    print("*  Messieurs, faites vos jeux !                                    *")
+    print("*  Bonne chance !                                                  *")
     print("*                                                                  *")
     print("********************************************************************")
     print('\n')
