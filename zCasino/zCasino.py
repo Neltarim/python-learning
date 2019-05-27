@@ -4,9 +4,8 @@
 from menu import * #on importe les modules de menu et jeu
 from game import *
 
-infinit = 1 #sert simplement a creer une boucle innfinie pour le reload de menu/jeu etc
 
-while infinit == 1:
+while True:
 
     choice = menu() #on affiche le menu et demande quoi faire
 
@@ -18,3 +17,5 @@ while infinit == 1:
 
     if choice == 3: #option3 : on  quitte le jeu
         MenuQuit()
+    
+    continue
