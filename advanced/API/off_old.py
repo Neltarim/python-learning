@@ -1,9 +1,5 @@
 import requests
-import logging
 
-
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 OFF_URL = "http://fr.openfoodfacts.org/"
 SEARCH_URL = OFF_URL + "cgi/search.pl?"
@@ -20,9 +16,8 @@ class Api_reach():
         res = requests.get(OFF_URL, headers=HEADERS)
         if res.status_code == requests.codes.ok:
             self.status_api = True
-            logger.info(" status API={}".format(self.status_api))
+            print(self.status_api)
         else:
-            logger.debug(" status API={}".format(self.status_api))
             print("Open Food Facts API is not currently available.")
             exit(0)        
 
@@ -47,8 +42,40 @@ class Api_reach():
 
         print("{} products found.".format(product_nbr))
 
+    def findgeneric(self, product):
+
+        payload = {
+            "search_terms": "{}".format(product),
+            "search_tag": "product",
+            "json" : 1
+        }
+
+        res = requests.get(SEARCH_URL, params=payload)
+        results = res.json()
+        
+        prod = results["products"]
+
+        print(prod[1]["generic_name"])
+        return prod[1]["generic_name"]
+
+    def similarto(self):
+
+        generic = self.findgeneric("jambon")
+
+        payload = {
+            "search_terms": "{}".format(generic),
+            "page_size" : 1,
+            "json" : 1
+        }
+
+        res = requests.get(SEARCH_URL, params=payload)
+        results = res.json()
+        products = results["products"]
+
+        for product in products:
+            print(product["product_name"])
+        
 
 if __name__ == "__main__":
     OFF_reach = Api_reach()
-    OFF_reach.test()
-    OFF_reach.findBrand("Lindt")
+    OFF_reach.similarto()

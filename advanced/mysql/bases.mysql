@@ -1,0 +1,7 @@
+## creer le nouveau user et lui donner les droits ##
+
+CREATE USER 'student'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON base.* TO 'student'@'localhost';
+
+note: il faut se logout et relog avec 'mysql -u student -p' ou utiliser faster_zsh
+
