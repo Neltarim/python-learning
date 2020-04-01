@@ -1,4 +1,0 @@
-#pour creer un fichier requirements.txt, il suffit pendant que l'env tourne,
-#de tapper 'pip freeze > requirements.txt
-
-#tapper 'pip install -r requirements.txt' pour telecharger les dependances

@@ -112,5 +112,15 @@ def update():
     conn.commit()
     conn.close()
 
-update()
-getdata()
+def istable(table):
+    conn = connectdb()
+    cursor = conn.cursor()
+
+    cursor.execute("SHOW TABLES LIKE \'" + table + "\'")
+    row = cursor.fetchall()
+
+    print(row)
+    return True
+
+
+istable("visiteurs")
