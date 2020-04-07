@@ -1,5 +1,6 @@
 import requests
 from sys import argv
+import json
 
 
 OFF_URL = "http://fr.openfoodfacts.org/"
@@ -19,10 +20,10 @@ class Api_reach():
             self.status_api = True
         else:
             print("Open Food Facts API is not currently available.")
-            exit(0)        
+            exit(0)
 
     def findBrand(self, brand_name):
-        
+
         payload = {
             "search_terms": "{}".format(brand_name),
             "search_tag": "brands",
@@ -52,7 +53,7 @@ class Api_reach():
 
         res = requests.get(SEARCH_URL, params=payload)
         results = res.json()
-        
+
         prod = results["products"]
 
         print("GENERIC NAME :" + prod[1]["generic_name"])
@@ -87,7 +88,7 @@ class Api_reach():
 
         res = requests.get(SEARCH_URL, params=payload)
         results = res.json()
-        
+
         tags = results["products"][1]
 
         for info in tags:
@@ -117,16 +118,63 @@ class Api_reach():
 
         print(i)
 
-    def get_category(self, cat):
-        req = requests.get("{}categorie/boissons&json=1".format(OFF_URL))
-        data_json = req.json()
-        sub_cats = data_json['categories']
-        
-        for sub_cat in sub_cats:
-            print(sub_cat['name'])
+    def get_category(self):
+        '''get categories from the URL API'''
+        r_cat = requests.get('https://fr.openfoodfacts.org/categories&json=1')
+        data_json = r_cat.json()
+        data_tags = data_json.get('tags')
+        data_cat = [d.get('name', 'None') for d in data_tags]
+        i = 2
+        while i < 12:
+            print("{}".format(data_cat[i]))
 
+            i=i+1
+
+    def test(self):
+        payload = {
+            'action': 'process',
+            'tagtype_0': 'categories', #which subject is selected (categories)
+            'tag_contains_0': 'contains', #contains or not
+            'tag_0': 'snacks', #parameters to choose
+            'sort_by': 'unique_scans_n',
+            'page_size': '100',
+            'countries': 'France',
+            'json': 1,
+            'page': 150
+        }
+
+        r_food = requests.get('https://fr.openfoodfacts.org/cgi/search.pl', params=payload)
+        food_json = r_food.json()
+        test2 = food_json.get('products')
+        print(test2[1]['product_name_fr'])
+
+        i = 0
+        for product in test2:
+            print(test2[i]['product_name'])
+            i+=1
+
+    def insert_values_aliment(self):
+        CATEGORIES_TO_DISPLAY = [(None, "boissons-alcoolisees")]
+        """Method that inserts our aliemnt into the aliment table
+            by searching through our API : Openfoodfacts"""
+
+        id_category = 0
+        for names in CATEGORIES_TO_DISPLAY:
+            # We get our aliment based on our categories
+            for page in range(1, 4):
+                link = f"""https://fr.openfoodfacts.org/categorie/
+                        {CATEGORIES_TO_DISPLAY[id_category][1]}
+                        /{page}.json"""
+                response = requests.get(link)
+                category_json = json.loads(response.text)
+
+
+                for products in category_json["products"]:
+
+                    sql_formula_aliment = {products["product_name"]}
+                    print(sql_formula_aliment)
 
 
 if __name__ == "__main__":
     OFF_reach = Api_reach()
-    OFF_reach.get_category("Boissons")
+    OFF_reach.insert_values_aliment()
