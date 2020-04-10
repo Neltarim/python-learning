@@ -122,5 +122,13 @@ def istable(table):
     print(row)
     return True
 
+def isempty(table):
+    conn = connectdb()
+    cursor = conn.cursor()
 
-istable("visiteurs")
+    cursor.execute("SELECT EXISTS (SELECT 1 FROM {})".format(table))
+    row = cursor.fetchall()
+    print(row[0][0])
+
+emptytable("visiteurs")
+isempty("visiteurs")

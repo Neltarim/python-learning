@@ -108,7 +108,8 @@ class Api_reach():
         req = requests.get('https://fr.openfoodfacts.org/categories&json=1')
         data_json = req.json()
         data_tags = data_json.get('tags')
-        data_cat = [d.get('name', 'None') for d in data_tags]
+        data_cat = [tag.get('name', 'None') for tag in data_tags]
+
         i = 0
         for cat in data_cat:
             print(cat)
@@ -130,51 +131,33 @@ class Api_reach():
 
             i=i+1
 
-    def test(self):
+    def test(self, cat):
         payload = {
             'action': 'process',
-            'tagtype_0': 'categories', #which subject is selected (categories)
-            'tag_contains_0': 'contains', #contains or not
-            'tag_0': 'snacks', #parameters to choose
+            'tagtype_0': 'categories',
+            'tag_contains_0': 'contains',
+            'tag_0': cat,
             'sort_by': 'unique_scans_n',
-            'page_size': '100',
+            'page_size': '150',
             'countries': 'France',
             'json': 1,
-            'page': 150
+            'page': 1
         }
 
         r_food = requests.get('https://fr.openfoodfacts.org/cgi/search.pl', params=payload)
         food_json = r_food.json()
         test2 = food_json.get('products')
-        print(test2[1]['product_name_fr'])
+        #print(test2[1]['product_name_fr'])
 
         i = 0
         for product in test2:
             print(test2[i]['product_name'])
             i+=1
 
-    def insert_values_aliment(self):
-        CATEGORIES_TO_DISPLAY = [(None, "boissons-alcoolisees")]
-        """Method that inserts our aliemnt into the aliment table
-            by searching through our API : Openfoodfacts"""
+        print("elem nbr: {}".format(i))
 
-        id_category = 0
-        for names in CATEGORIES_TO_DISPLAY:
-            # We get our aliment based on our categories
-            for page in range(1, 4):
-                link = f"""https://fr.openfoodfacts.org/categorie/
-                        {CATEGORIES_TO_DISPLAY[id_category][1]}
-                        /{page}.json"""
-                response = requests.get(link)
-                category_json = json.loads(response.text)
-
-
-                for products in category_json["products"]:
-
-                    sql_formula_aliment = {products["product_name"]}
-                    print(sql_formula_aliment)
 
 
 if __name__ == "__main__":
     OFF_reach = Api_reach()
-    OFF_reach.insert_values_aliment()
+    OFF_reach.test("boissons")
