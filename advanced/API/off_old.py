@@ -131,14 +131,14 @@ class Api_reach():
 
             i=i+1
 
-    def test(self, cat):
+    def test3(self, cat):
         payload = {
             'action': 'process',
             'tagtype_0': 'categories',
             'tag_contains_0': 'contains',
             'tag_0': cat,
             'sort_by': 'unique_scans_n',
-            'page_size': '150',
+            'page_size': '1',
             'countries': 'France',
             'json': 1,
             'page': 1
@@ -152,6 +152,11 @@ class Api_reach():
         i = 0
         for product in test2:
             print(test2[i]['product_name'])
+            try:
+                print(test2[i]['nutrition_grades'])
+
+            except:
+                pass
             i+=1
 
         print("elem nbr: {}".format(i))
@@ -160,4 +165,4 @@ class Api_reach():
 
 if __name__ == "__main__":
     OFF_reach = Api_reach()
-    OFF_reach.test("boissons")
+    OFF_reach.test3("boissons")

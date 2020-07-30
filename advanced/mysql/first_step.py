@@ -28,7 +28,7 @@ def tablecreate():
     
     conn = connectdb()
     cursor = conn.cursor()
-    print("Creating table \"visiteurs\" in " + db)
+    print("Creating table \"visi teurs\" in " + db)
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS visiteurs (
         id int(5) NOT NULL AUTO_INCREMENT,
@@ -43,6 +43,8 @@ def tablecreate():
 
 def insertdata():
     print("Data insertion ...")
+    karin_name = "karin"
+    karin_age = "26"
     visiteurs = [
         {"name": "brigitte", "age": "98"},
         {"name": "francois", "age": "56"},
@@ -119,8 +121,10 @@ def istable(table):
     cursor.execute("SHOW TABLES LIKE \'" + table + "\'")
     row = cursor.fetchall()
 
-    print(row)
-    return True
+    if row == []:
+        return False
+    elif row[0][0] == table:
+        return True
 
 def isempty(table):
     conn = connectdb()
@@ -130,5 +134,12 @@ def isempty(table):
     row = cursor.fetchall()
     print(row[0][0])
 
-emptytable("visiteurs")
-isempty("visiteurs")
+def insert_str_test():
+    prod = {"name": "mabite", "id": 12, "categorie": "penis"}
+    st = "pett"
+
+    res = ("""bloup : , name : %(name)s, id : %(id)s, cat : %(categorie)s""", prod)
+
+    
+
+insert_str_test()
